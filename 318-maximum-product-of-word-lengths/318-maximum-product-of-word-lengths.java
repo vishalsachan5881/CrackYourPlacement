@@ -11,7 +11,8 @@ class Solution {
     } 
     public int maxProduct(String[] words) {
         int n   = words.length;
-        int[] state = new int[n];
+        int[] state = new int[n]; // state array will be storing the bit mask for the string 
+		// function get() will be setting the bits according to the characters in the string and returning the integer
         for(int i = 0 ; i<n; i++)
             state[i] = get(words[i]);
         int ans = 0;
