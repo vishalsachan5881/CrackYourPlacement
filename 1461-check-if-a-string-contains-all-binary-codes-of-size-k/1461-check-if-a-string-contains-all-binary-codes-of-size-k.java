@@ -7,6 +7,8 @@ class Solution {
             st.add(ss);
             l++;r++;
         }
+        for(var v  :st)
+            System.out.println(v);
         return (st.size() == Math.pow(2,k));
     }
 }
