@@ -23,15 +23,16 @@ class Node{
 class Solution
 {
     //Function to count nodes of a linked list.
+    public static int fn(Node head, int c){
+        if(head == null)
+        return 0;
+        
+        return 1 + fn(head.next,0);
+    }
     public static int getCount(Node head)
     {
         
-        int c = 0;
-        while(head!=null){
-            c++;
-            head = head.next;
-        }
-        return c;
+        return fn(head,0);
     }
 }
     
