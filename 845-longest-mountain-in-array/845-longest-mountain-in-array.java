@@ -20,20 +20,13 @@ class Solution {
         return c;
     }
     public int longestMountain(int[] arr) {
-        int n  = arr.length;
-        boolean[] temp = new boolean[n];
-        
+        int n  = arr.length, ans = 0;
         for(int i =1; i<n-1;i++){
                 if(arr[i] > arr[i-1] && arr[i]>arr[i+1])
-                    temp[i] = true;
+                    ans = Math.max(ans, right(arr,i)+left(arr,i)+1);
         }
        // System.out.println(Arrays.toString(temp));
-        int ans = 0;
-        for(int i = 0;i<n;i++){
-            if(temp[i])
-               ans = Math.max(ans, right(arr,i)+left(arr,i)+1);
-               
+       return ans;
         }
-               return ans;
+               
     }
-}
