@@ -10,10 +10,16 @@ class Solution {
     }
     public int lengthOfLIS(int[] nums) {
         int n  = nums.length;
-        int[][] dp = new int[n][n+1];
-        for(int i  = 0;i<n;i++)
-            for(int j = 0; j<n+1;j++)
-                dp[i][j] = -1;
-        return fn(nums, 0, -1,dp);
+        int[][] dp = new int[n+1][n+1];
+        for(int ind  = n-1; ind>=0;ind--)
+            for(int prev = ind-1 ; prev>=-1;prev--)
+            {
+                int l1=  dp[ind+1][prev+1];
+                   if(prev == -1 || nums[ind] > nums[prev]) 
+                       l1  = Math.max(l1, 1+dp[ind+1][ind+1]);
+                
+                dp[ind][prev+1] = l1;
+            }
+    return dp[0][0];
     }
 }
