@@ -1,42 +1,30 @@
 class Solution {
-    
-    
-    public boolean fn(String a, String b){
+    public boolean compare(String s1 ,String s2){
+        if(s2.length()+1 != s1.length()) return false;
         
-        if(a.length() != b.length()+1) return false;
-        
-        int i = 0, j = 0;
-        while(i < a.length()){
-            
-            if(j<b.length() && a.charAt(i) == b.charAt(j))
+        int i = 0 , j = 0;
+        while(i < s1.length()){
+            if(j <s2.length() && s1.charAt(i) == s2.charAt(j))
             {
-                i++;
-                j++;
-            }else{
-                i++;
-            }
+                i++;j++;
+            }else i++;
         }
-        
-        if( i == a.length() && j == b.length()) return true;
+        if(i == s1.length() && j == s2.length()) return true;
         return false;
-        
-        
-        
-        
     }
-    public int longestStrChain(String[] words) {
-        int n = words.length;
-        Arrays.sort(words,(a,b)->a.length()-b.length());
+    public int longestStrChain(String[] arr) {
+        Arrays.sort(arr, (a,b) -> {return a.length() - b.length();});
+        int n  = arr.length;
         int[] dp = new int[n];
         Arrays.fill(dp,1);
-        for(int i = 0 ;i<n;i++)
+        for(int i  = 0 ; i<n;i++)
             for(int j = 0 ; j<i; j++)
-                if(fn(words[i] , words[j]))
-                    dp[i] = Math.max(dp[i], dp[j]+1);
+                if(compare(arr[i], arr[j]))
+                    dp[i] =  Math.max(dp[i], dp[j]+1);
         
-        int max = Integer.MIN_VALUE;
+        int max  =1;
         for(var v : dp)
-            max = Math.max(v, max);
+            max = Math.max(max, v);
         
         return max;
     }
