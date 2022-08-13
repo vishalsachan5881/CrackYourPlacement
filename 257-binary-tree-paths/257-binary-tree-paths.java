@@ -14,31 +14,29 @@
  * }
  */
 class Solution {
-    public static void fn(TreeNode root, List<String> ans, List<Integer> temp){
-        
-        if(root.left == null && root.right == null){
-            String s = "";
-            for(int i = 0;i<temp.size();i++)
-                s += (temp.get(i) + "->");
-            s += root.val;
-            ans.add(s);
+    public void fn(TreeNode root,String al,List<String>ans){
+        if(root.left==null&&root.right==null){
+            //al.append("->"+root.val);
+            al += ("->"+root.val);
+            //al.delete(0,1);
+            ans.add(al.substring(3));
             return;
         }
-        temp.add(root.val);
-        if(root.left != null){
-            fn(root.left, ans, temp);
+        
+        if(root.left!=null){
+            fn(root.left,al+"->"+root.val,ans);
         }
-        if(root.right  != null)
-            fn(root.right, ans, temp);
         
-        temp.remove(temp.size()-1);
-        
-        
+        if(root.right!=null){
+            fn(root.right,al+"->"+root.val,ans);
+        }
+       
     }
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        fn(root, ans, temp);
+        String al = " ";
+        fn(root,al,ans);
+        System.out.println(ans);
         return ans;
     }
 }
