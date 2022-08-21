@@ -1,16 +1,16 @@
 class Solution {
-    //eg :- stamp='abc', target='ababc' -> target='*****'
-    //start iterating over target if target has stamp or not
-    //if it contains stamp, then replace all characters corresponding to stamp with *
-    //also while comparing target with stamp,
-    //* can be substituted with any character because this will be overwritten
+//     eg :- stamp='abc', target='ababc' -> target='*****'
+//     start iterating over target if target has stamp or not
+//     if it contains stamp, then replace all characters corresponding to stamp with *
+//     also while comparing target with stamp,
+//     * can be substituted with any character because this will be overwritten
     
-    //step 1:- target = 'ababc'
-    //step 2:- target = 'ab***'(abc has been replaced with stars)
-    //step 3:- target = '*****'(ab* can make abc by substituting * with c, therefore replace it with star)
+//     step 1:- target = 'ababc'
+//     step 2:- target = 'ab***'(abc has been replaced with stars)
+//     step 3:- target = '*****'(ab* can make abc by substituting * with c, therefore replace it with star)
     
-    //this is the approach we would be following
-    //carefully read the code to better understand the approach
+//     this is the approach we would be following
+//     carefully read the code to better understand the approach
     public int[] movesToStamp(String stamp, String target) {
         //reverse engineering should be used
         //start from T and convert it to all stars
