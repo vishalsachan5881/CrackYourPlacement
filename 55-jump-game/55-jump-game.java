@@ -1,28 +1,18 @@
 class Solution {
-    public boolean canJump(int[] nums) {
-        int n = nums.length;
-        boolean[] arr = new boolean[n];
-        
-        arr[n-1] = true;
-        for(int i = n-2; i>=0; i--){
-            if(nums[i] == 0)
-                arr[i] = false;
-            else{
-                int f = 1;
-                for(int start = i+1 ; start <= Math.min(nums[i]+i , n-1);start++){
-                    if(arr[start] == true){
-                        f = 0;
-                        break;
-                    }
-                }
-                if(f == 0) arr[i] = true;
-                else arr[i] = false;
-            }
-            
-            
-            
-            
-        }
-        return arr[0];
+   public boolean canJump(int[] nums) {
+    int[] dp = new int[nums.length];
+    Arrays.fill(dp ,-1);
+    return helper(0, nums, dp);
+}
+
+public boolean helper(int index, int[] nums, int[] dp){
+    if(index == nums.length-1) return true;
+    if(dp[index] != -1) return dp[index] == 1;
+    for(int i=1; i<=nums[index]; i++){
+        boolean current = helper(index+i, nums, dp);
+        dp[index] = (current == true ? 1 : 0);
+        if(current == true) return true;
     }
+    return false;
+}
 }
