@@ -1,16 +1,18 @@
 class Solution {
-    public int fn(int index , int[]nums, int[]dp){
-        if(index < 0) return 0;
-        if(index == 0) return dp[index] = nums[0];
-        if(dp[index] != -1) return dp[index];
-        int taken = nums[index] + fn(index-2 , nums,dp);
-        int notTaken = fn(index-1, nums,dp);
+    
+    public int fn(int[] nums, int n,int[] dp){
         
-        return dp[index] = Math.max(taken, notTaken);
+        if(n < 0) return 0;
+        if(dp[n] != -1) return dp[n];
+        int take = nums[n]+fn(nums, n-2,dp);
+        int notTake = fn(nums, n-1,dp);
+        
+        return dp[n] = Math.max(take, notTake);
+        
     }
     public int rob(int[] nums) {
-        int[] dp = new int[nums.length];
-        Arrays.fill(dp,-1);
-        return fn(nums.length-1, nums, dp);
+       int[] dp = new int[nums.length];
+        Arrays.fill(dp, -1);
+        return fn(nums, nums.length-1, dp);
     }
 }
