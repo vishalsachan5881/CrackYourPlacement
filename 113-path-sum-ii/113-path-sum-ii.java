@@ -14,27 +14,27 @@
  * }
  */
 class Solution {
-    public void fn(TreeNode root,List<List<Integer>> ans, List<Integer> temp,int sum, int targetSum){
-        if(root == null) return;
-        if(root.left == null && root.right == null && sum+root.val == targetSum){
-            temp.add(root.val);
-            ans.add(new ArrayList<>(temp));
-            temp.remove(temp.size()-1);
+    public static void fn(TreeNode node, int sum, int t, List<List<Integer>> ans, List<Integer> al){
+        if(node == null) return;
+        if(node.left == null && node.right == null && sum + node.val == t){
+            al.add(node.val);
+            ans.add(new ArrayList<>(al));
+            al.remove(al.size()-1);
             return;
         }
-        sum += root.val;
-        temp.add(root.val);
-        fn(root.left, ans, temp, sum, targetSum);
-        fn(root.right, ans, temp, sum, targetSum);
-        temp.remove(temp.size()-1);
         
+        sum += node.val;
+        al.add(node.val);
+        
+        fn(node.left, sum, t , ans, al);
+        fn(node.right, sum, t, ans, al);
+        al.remove(al.size()-1);
         
     }
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        int sum =0;
-        fn(root, ans, temp, sum, targetSum);
+        List<Integer> al = new ArrayList<>();
+        fn(root, 0, targetSum, ans, al);
         return ans;
     }
 }
