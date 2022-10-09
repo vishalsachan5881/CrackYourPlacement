@@ -14,21 +14,23 @@
  * }
  */
 class Solution {
-    HashMap<Integer,Integer> hm = new HashMap<>();
-    int flag = 0;
-    public  void pre(TreeNode root, int t){
-        if(root == null) return;
-        
-        if(hm.containsKey(t-root.val)){
-            flag = 1;
-        }
-        else hm.put(root.val, 1);
-        
-        pre(root.left, t);
-        pre(root.right, t);
-    }
-    public boolean findTarget(TreeNode root, int k) {
-        pre(root,k);
-            return (flag==1);
-    }
+   public boolean findTarget(TreeNode root, int k) {
+    return run(root, root, k);
+}
+
+public boolean run(TreeNode root, TreeNode currentNode, int k) {
+    if (currentNode == null) return false;
+    if (find(root, k-currentNode.val, currentNode)) return true;
+    
+    return run(root, currentNode.left, k) || run(root, currentNode.right, k);
+}
+
+public boolean find(TreeNode root, int val, TreeNode current) {
+    if (root == null) return false;
+    if (val > root.val) return find(root.right, val, current);
+    else if (val < root.val) return find(root.left, val, current);
+    else if (val == root.val) return root != current;
+    
+    return false;
+}
 }
