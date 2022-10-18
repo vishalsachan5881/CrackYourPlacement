@@ -5,19 +5,17 @@ class Solution {
 		String s = countAndSay(n-1);  
 		StringBuilder str = new StringBuilder(); 
 		
-		int count = 1 , i = 0; 
+		int count = 1  ;int i  = 0 ;
+      for( i = 1 ; i < s.length() ; i++)
+      {
+          if(s.charAt(i) == s.charAt(i-1)) count++;
+          else{
+              str.append(count).append(s.charAt(i-1));
+              count = 1;
+          }
+      }
+      str.append(count).append(s.charAt(i-1));
 		
-		while(i < s.length()){ 
-		
-			char ch = s.charAt(i++); 
-			
-			while(i < s.length() && s.charAt(i) == ch){ 
-				i++;    count++;
-			}
-			
-			str.append(count).append(ch); 
-			count = 1; 
-		}
 		
 	return str.toString(); // return str as string
 }
