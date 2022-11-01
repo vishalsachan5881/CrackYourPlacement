@@ -1,36 +1,23 @@
-class Pair{
-    String s;
-    int i;
-    public Pair(String ss,  int ii){
-        s  = ss;
-        i =  ii;
-    }
-}
-
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        int n = strs.length;
-        Pair[] fin = new Pair[n];
-        for(int i = 0 ; i < n; i++){
-            String str = strs[i];
-            char[] c = str.toCharArray();
-            Arrays.sort(c);
-            fin[i] = new Pair(new String(c), i);
-        }
-        Arrays.sort(fin, (a,b)-> a.s.compareTo(b.s));
         List<List<String>> ans = new ArrayList<>();
-        List<String> temp = new ArrayList<>();
-        temp.add(strs[fin[0].i]);
-        for(int i = 1 ; i < n ; i++){
-            if(fin[i].s.equals(fin[i-1].s))
-                temp.add(strs[fin[i].i]);
-            else{
-                ans.add(temp);
-                temp = new ArrayList<>();
-                temp.add(strs[fin[i].i]);
+        HashMap<HashMap<Character,Integer>, List<String>> baap = new HashMap<>();
+        for(var v : strs){
+            HashMap<Character, Integer> hm = new HashMap<>();
+            for(int i = 0 ; i < v.length();i++)
+                hm.put(v.charAt(i), hm.getOrDefault(v.charAt(i) , 0) + 1);
+            
+            if(baap.containsKey(hm))
+                baap.get(hm).add(v);
+            else {
+                baap.put(hm , new ArrayList<>());
+                baap.get(hm).add(v);
             }
         }
-        ans.add(temp);
+        for(var v : baap.values())
+            ans.add(v);
+        
         return ans;
+        
     }
 }
