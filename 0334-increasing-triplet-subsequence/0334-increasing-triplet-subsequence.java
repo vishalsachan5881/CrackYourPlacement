@@ -1,12 +1,29 @@
 class Solution {
     public boolean increasingTriplet(int[] nums) {
-        // start with two largest values, as soon as we find a number bigger than both, while both have been updated, return true.
-        int small = Integer.MAX_VALUE, big = Integer.MAX_VALUE;
-        for (int n : nums) {
-            if (n <= small) { small = n; } // update small if n is smaller than both
-            else if (n <= big) { big = n; } // update big only if greater than small but smaller than big
-            else return true; // return if you find a number bigger than both
+        int n = nums.length;
+        int[] rt = new int[n];
+        rt[n-1] = nums[n-1];
+        for(int i = n-2; i>=0;i--)
+            rt[i]  = Math.max(rt[i+1], nums[i]);
+        
+       boolean ans = false;
+        
+        
+       TreeSet<Integer> ts = new TreeSet<>();
+        ts.add(nums[0]);
+        for(int i = 1; i < n ; i++){
+            if(ts.lower(nums[i]) == null){
+                
+            ts.add(nums[i]);
+                continue;}
+            else
+               {
+                
+                if(rt[i] > nums[i]) return true;
+           }
+            ts.add(nums[i]);
         }
+        
         return false;
     }
 }
